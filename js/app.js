@@ -28,6 +28,7 @@ function agregarCurso(e) {
 
 // Leer el contenido del HTML al que le dimos click y extrae la información del curso
 function leerDatosCurso(curso) {
+  //curso seleccionado
   // console.log(curso);
 
   // Crear un objeto con el contenido del curso actual
@@ -41,7 +42,7 @@ function leerDatosCurso(curso) {
 
   // Agrega elementos al arreglo de carrito
   articulosCarrito = [...articulosCarrito, infoCurso]; //para no perder la referencia de los cursos agregados
-  console.log(articulosCarrito);
+  // console.log(articulosCarrito);
 
   carritoHTML();
 }
@@ -53,10 +54,25 @@ function carritoHTML() {
 
   //Recorre el carrito y genera el HTML
   articulosCarrito.forEach((curso) => {
+    // aplicamos destructuring para obtener las propiedades del objeto
+    const { imagen, titulo, precio, cantidad, id } = curso;
+
     const row = document.createElement('tr');
     row.innerHTML = `
       <td>
-        ${curso.titulo}
+        <img src="${imagen}" width="100" >
+      </td>
+      <td>
+        ${titulo}
+      </td>
+      <td>
+        ${precio}
+      </td>
+      <td>
+        ${cantidad}
+      </td>
+      <td>
+        <a href="#" class="borrar-curso" data-id="${id}"> x </a>
       </td>
     `;
 
