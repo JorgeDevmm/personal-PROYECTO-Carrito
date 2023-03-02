@@ -46,7 +46,19 @@ function eliminarCurso(e) {
 
     // Eliminar del arreglo de articulosCarrito por data-id
 
-    articulosCarrito = articulosCarrito.filter((curso) => curso.id != cursoId);
+    articulosCarrito = articulosCarrito.filter((curso) => {
+      if (curso.id === cursoId) {
+        if (curso.cantidad > 1) {
+          curso.cantidad -= 1;
+
+          return curso;
+        } else {
+          delete curso; //elimina arreglo
+        }
+      } else {
+        return curso;
+      }
+    });
 
     carritoHTML(); //iterar sobre el carrito y mostrar su HTML
   }
@@ -87,7 +99,7 @@ function leerDatosCurso(curso) {
     articulosCarrito = [...articulosCarrito, infoCurso]; //para no perder la referencia de los cursos agregados
   }
 
-  // console.log(articulosCarrito);
+  console.log(articulosCarrito);
 
   carritoHTML();
 }
